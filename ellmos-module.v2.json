@@ -3,7 +3,6 @@
   "id": "doc-keeper",
   "display_name": "Doc-Keeper (3-Cause Documentation Machine)",
   "version": "0.1.0",
-  "summary": "Reusable 3-Cause Documentation Auditor & Transparent Decision Rule Router for any repository.",
   "category": "control",
   "kind": "tool",
   "status": "active",
@@ -55,7 +54,7 @@
   "source_of_truth": {
     "type": "git-repository",
     "path": ".",
-    "repository": "https://github.com/ellmos-ai/doc-keeper.git"
+    "repository": "https://github.com/ellmos-ai/doc-keeper"
   },
   "adapters": []
 }
