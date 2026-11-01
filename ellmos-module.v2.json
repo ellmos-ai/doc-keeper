@@ -40,7 +40,7 @@
   ],
   "state": {
     "ownership": "module",
-    "location": "workspace"
+    "location": "project"
   },
   "boundaries": {
     "network": "none",
