@@ -1,0 +1,61 @@
+{
+  "schema": "ellmos.module.v2",
+  "id": "doc-keeper",
+  "display_name": "Doc-Keeper (3-Cause Documentation Machine)",
+  "version": "0.1.0",
+  "summary": "Reusable 3-Cause Documentation Auditor & Transparent Decision Rule Router for any repository.",
+  "category": "control",
+  "kind": "tool",
+  "status": "active",
+  "visibility": "public",
+  "provides": [
+    "doc-keeper",
+    "three-cause-doc-audit",
+    "decision-processing-rules"
+  ],
+  "requires": [],
+  "optional": [
+    "task-master",
+    "marblerun"
+  ],
+  "conflicts": [],
+  "surfaces": [
+    "library",
+    "cli",
+    "workflow"
+  ],
+  "roles": [
+    {
+      "id": "doc-keeper",
+      "label": "DOC-KEEPER",
+      "prompt": "prompts/DOC-KEEPER.en.md",
+      "request": "Start as DOC-KEEPER. Audit documentation claims against code reality using the 3-Cause Model and transparent decision processing rules.",
+      "modes": [],
+      "providers": [
+        "claude",
+        "codex",
+        "agy",
+        "kimi"
+      ]
+    }
+  ],
+  "state": {
+    "ownership": "module",
+    "location": "workspace"
+  },
+  "boundaries": {
+    "network": "none",
+    "data": "public",
+    "platforms": [
+      "windows",
+      "macos",
+      "linux"
+    ]
+  },
+  "source_of_truth": {
+    "type": "git-repository",
+    "path": ".",
+    "repository": "https://github.com/ellmos-ai/doc-keeper.git"
+  },
+  "adapters": []
+}
