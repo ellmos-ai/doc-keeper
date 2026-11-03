@@ -9,7 +9,6 @@ from doc_keeper import (
     audit_repository,
     classify_doc_reality_diff,
     extract_repo_claims,
-    load_doc_machine_config,
     resolve_doc_machine_dispatch,
 )
 from doc_keeper.cli import main as cli_main

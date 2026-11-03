@@ -26,19 +26,19 @@ DEFAULT_DOC_MACHINE_CONFIG: Dict[str, Any] = {
         "cause_routing": {
             "unintended_erosion": {
                 "branches": ["local_taskplan", "user_notification"],
-                "reason": "Ungewollte Erosion/Drift: Reparatur-Task fuer Hintergrund-Worker einstellen + Nutzer informieren.",
+                "reason": "Ungewollte Erosion/Drift: Reparatur-Task für Hintergrund-Worker einstellen + Nutzer informieren.",
             },
             "planned_terraforming_pending": {
                 "branches": ["local_taskplan"],
-                "reason": "Fehlendes/geplantes Terraforming: Taskstatus pruefen/anpassen und SOLL vs. IST markieren.",
+                "reason": "Fehlendes/geplantes Terraforming: Taskstatus prüfen/anpassen und SOLL vs. IST markieren.",
             },
             "completed_terraforming_doc_lag": {
                 "branches": ["local_doc_update"],
-                "reason": "Erfolgtes Terraforming mit lueckenhafter Doku: Doku und Uebersetzungen direkt lokal nachziehen.",
+                "reason": "Erfolgtes Terraforming mit lückenhafter Doku: Doku und Übersetzungen direkt lokal nachziehen.",
             },
             "aligned": {
                 "branches": [],
-                "reason": "Doku und Code-Realitaet stimmen ueberein.",
+                "reason": "Doku und Code-Realität stimmen überein.",
             },
         },
         "trigger_overrides": {
@@ -48,7 +48,7 @@ DEFAULT_DOC_MACHINE_CONFIG: Dict[str, Any] = {
             },
             "complex_multi_file_doc_repair": {
                 "branches": ["local_genie_marblerun", "user_notification"],
-                "reason": "Mehrstufige Reparatur ueber lokale MarbleRun-Staffette (wishes-come-true-local).",
+                "reason": "Mehrstufige Reparatur über lokale MarbleRun-Staffette (wishes-come-true-local).",
             },
             "developer_wishes_experiment": {
                 "branches": ["gitlab_wishes_come_true", "user_notification"],

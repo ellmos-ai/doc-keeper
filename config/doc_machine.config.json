@@ -26,7 +26,7 @@
             "cause_routing": {
                 "aligned": {
                     "branches": [],
-                    "reason": "Doku-Claim und gemessene Realitaet stimmen ueberein (Beleg-Hash erneuern)."
+                    "reason": "Doku-Claim und gemessene Realität stimmen überein (Beleg-Hash erneuern)."
                 },
                 "completed_terraforming_doc_lag": {
                     "branches": ["local_doc_update"],
@@ -34,7 +34,7 @@
                 },
                 "planned_terraforming_pending": {
                     "branches": ["local_taskplan"],
-                    "reason": "Ursache 2 (Geplantes Terraforming): Vorauseilende Doku (SOLL) -> Taskstatus pruefen/Task anlegen und SOLL vs. IST trennen."
+                    "reason": "Ursache 2 (Geplantes Terraforming): Vorauseilende Doku (SOLL) -> Taskstatus prüfen/Task anlegen und SOLL vs. IST trennen."
                 },
                 "unintended_erosion": {
                     "branches": ["local_taskplan", "user_notification"],
@@ -44,7 +44,7 @@
             "trigger_overrides": {
                 "manual_developer_wish": {
                     "branches": ["local_genie_marblerun", "user_notification"],
-                    "reason": "Manueller Entwickler-Trigger startet lokale Genie/MarbleRun-Kette mit Rueckmeldung."
+                    "reason": "Manueller Entwickler-Trigger startet lokale Genie/MarbleRun-Kette mit Rückmeldung."
                 },
                 "ci_or_gitlab_issue": {
                     "branches": ["gitlab_wishes_come_true", "local_taskplan"],

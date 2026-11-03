@@ -4,10 +4,9 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-import sys
 from typing import Sequence
 
-from .classifier import classify_doc_reality_diff, load_doc_machine_config, resolve_doc_machine_dispatch
+from .classifier import load_doc_machine_config
 from .extractor import audit_repository
 
 

@@ -1,18 +1,100 @@
 __pycache__/
 *.py[cod]
-*$py.class
-*.egg-info/
-.eggs/
-dist/
-build/
+*.pyc
+*.pyo
+*.pyd
+
+# Testing, coverage and linting caches
 .pytest_cache/
+.pytest_temp/
+.pytest_tmp*/
 .ruff_cache/
+.mypy_cache/
+.tox/
+.hypothesis/
+.turbo/
+.coverage
+.coverage.*
+coverage/
+htmlcov/
+*.egg-info/
+build/
+dist/
+wheelhouse/
+.wheel-smoke/
+
+# Virtual environments
 .venv/
 venv/
-.env
-*.db
-*.sqlite
-data/
+env/
+
+# Editor and IDE configurations
 .idea/
 .vscode/
-MARKETING-LOG.txt
+*.sublime-*
+
+# Local databases, secrets and data
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+.env
+.env.*
+.env.local
+*.local.json
+config.local.*
+data/
+
+# Secret and credential protection
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cert
+.npmrc
+.pypirc
+*token*
+*secret*
+credentials.json
+secrets.json
+MARKETING-LOG*
+
+# Lock protection & Cloud-Sync Multi-Host safety
+LOCK
+LOCK.*
+LOCK.user.*
+LOCK.until.*
+LOCK.condition.*
+.automation-lock
+LOCK*.txt
+LOCK.permissions.json
+*.lock
+uv.lock
+!package-lock.json
+
+# Cloud-Sync conflict patterns
+* (kopie)*
+* (copy)*
+* (Kopie)*
+* (Copy)*
+*conflicted copy*
+*-WORKSTATION*
+*-WORKSTATION-LG*
+*-ASUS*
+*-ASUS-GEI*
+*-LAPTOP*
+*-Mac Studio*
+*.sync-temp-*
+*.sync-conflict-*
+*.conflict
+*.orig
+
+# OS artifacts
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Hostabhängige Lage - gehört NICHT ins Repo
+config.json
