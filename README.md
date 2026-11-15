@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.svg" alt="doc-keeper banner" width="100%">
+</p>
+
 # doc-keeper — 3-Cause Documentation Machine & Decision Rule Router (`ellmos.module.v2`)
 
 **English** | [Deutsch](README_de.md)
