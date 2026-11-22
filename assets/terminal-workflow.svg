@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" width="880" height="520" role="img" aria-labelledby="title desc">
+  <title id="title">doc-keeper CLI Workflow — 3-Cause Documentation Audit &amp; Decision Rule Router</title>
+  <desc id="desc">Dark-mode terminal showing python -m doc_keeper audit and rules commands with deterministic 3-cause JSON output.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer window -->
+  <rect x="8" y="8" width="864" height="504" rx="14" fill="url(#bg)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Title bar -->
+  <path d="M8 22 C8 14.27 14.27 8 22 8 L858 8 C865.73 8 872 14.27 872 22 L872 44 L8 44 Z" fill="url(#bar)"/>
+  <line x1="8" y1="44" x2="872" y2="44" stroke="#334155" stroke-width="1"/>
+  <circle cx="30" cy="26" r="6" fill="#ef4444"/>
+  <circle cx="50" cy="26" r="6" fill="#f59e0b"/>
+  <circle cx="70" cy="26" r="6" fill="#10b981"/>
+  <text x="440" y="30" text-anchor="middle" font-family="'Segoe UI', Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#cbd5e1">doc-keeper v0.1.0 — 3-Cause Documentation Machine (Local-First / Zero-Deps)</text>
+
+  <!-- Terminal body -->
+  <g font-family="'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace" font-size="13">
+    <!-- Command 1 -->
+    <text x="28" y="74" fill="#38bdf8" font-weight="700">$</text>
+    <text x="44" y="74" fill="#f8fafc">python -m doc_keeper audit ./my-repo --json</text>
+
+    <!-- JSON Output -->
+    <text x="28" y="102" fill="#94a3b8">{</text>
+    <text x="46" y="122" fill="#7dd3fc">"schema"</text><text x="112" y="122" fill="#94a3b8">:</text><text x="124" y="122" fill="#86efac">"ellmos.doc-keeper-audit-report.v1"</text><text x="412" y="122" fill="#94a3b8">,</text>
+    <text x="46" y="142" fill="#7dd3fc">"summary"</text><text x="120" y="142" fill="#94a3b8">: {</text>
+    <text x="64" y="162" fill="#cbd5e1">"total_claims_probed"</text><text x="234" y="162" fill="#94a3b8">:</text><text x="246" y="162" fill="#fde047">18</text><text x="262" y="162" fill="#94a3b8">,</text>
+    <text x="64" y="182" fill="#cbd5e1">"aligned_claims"</text><text x="194" y="182" fill="#94a3b8">:</text><text x="206" y="182" fill="#34d399">15</text><text x="222" y="182" fill="#94a3b8">,</text>
+    <text x="64" y="202" fill="#fca5a5">"unintended_erosion"</text><text x="226" y="202" fill="#94a3b8">:</text><text x="238" y="202" fill="#f87171">1</text><text x="246" y="202" fill="#94a3b8">,</text>
+    <text x="278" y="202" fill="#64748b"># Cause 1 -&gt; P1 task + user alert (keep SOLL)</text>
+    <text x="64" y="222" fill="#93c5fd">"planned_terraforming_pending"</text><text x="306" y="222" fill="#94a3b8">:</text><text x="318" y="222" fill="#60a5fa">1</text><text x="326" y="222" fill="#94a3b8">,</text>
+    <text x="358" y="222" fill="#64748b"># Cause 2 -&gt; P2 task + mark SOLL vs IST</text>
+    <text x="64" y="242" fill="#6ee7b7">"completed_terraforming_doc_lag"</text><text x="322" y="242" fill="#94a3b8">:</text><text x="334" y="242" fill="#34d399">1</text>
+    <text x="358" y="242" fill="#64748b"># Cause 3 -&gt; local_doc_update</text>
+    <text x="46" y="262" fill="#94a3b8">},</text>
+    <text x="46" y="282" fill="#7dd3fc">"findings"</text><text x="128" y="282" fill="#94a3b8">: [</text>
+    <text x="64" y="302" fill="#94a3b8">{</text>
+    <text x="76" y="302" fill="#7dd3fc">"cause"</text><text x="132" y="302" fill="#94a3b8">:</text><text x="144" y="302" fill="#f87171">"unintended_erosion"</text><text x="304" y="302" fill="#94a3b8">,</text>
+    <text x="316" y="302" fill="#7dd3fc">"selected_branches"</text><text x="468" y="302" fill="#94a3b8">: [</text><text x="484" y="302" fill="#fde047">"local_taskplan"</text><text x="612" y="302" fill="#94a3b8">,</text><text x="624" y="302" fill="#fde047">"user_notification"</text><text x="770" y="302" fill="#94a3b8">] }</text>
+    <text x="46" y="322" fill="#94a3b8">]</text>
+    <text x="28" y="342" fill="#94a3b8">}</text>
+
+    <!-- Divider -->
+    <line x1="28" y1="362" x2="852" y2="362" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Command 2 -->
+    <text x="28" y="390" fill="#38bdf8" font-weight="700">$</text>
+    <text x="44" y="390" fill="#f8fafc">python -m doc_keeper rules ./my-repo</text>
+    <text x="28" y="418" fill="#a7f3d0">[OK] schema: ellmos.doc-machine.config.v1 | locality: local_ocean_bach_only</text>
+    <text x="28" y="438" fill="#cbd5e1">     branches: local_taskplan | local_genie_marblerun | gitlab_wishes_come_true | user_notification | local_doc_update</text>
+  </g>
+
+  <!-- Footer badges -->
+  <rect x="28" y="464" width="170" height="28" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+  <text x="113" y="483" text-anchor="middle" font-family="'Segoe UI', Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#a7f3d0">AST + Filesystem Safe</text>
+
+  <rect x="212" y="464" width="186" height="28" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1"/>
+  <text x="305" y="483" text-anchor="middle" font-family="'Segoe UI', Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#bfdbfe">0 Runtime Dependencies</text>
+
+  <rect x="412" y="464" width="196" height="28" rx="6" fill="#312e81" stroke="#6366f1" stroke-width="1"/>
+  <text x="510" y="483" text-anchor="middle" font-family="'Segoe UI', Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#c7d2fe">Zero Network Egress</text>
+
+  <rect x="622" y="464" width="230" height="28" rx="6" fill="#3f1d2b" stroke="#f43f5e" stroke-width="1"/>
+  <text x="737" y="483" text-anchor="middle" font-family="'Segoe UI', Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#fecdd3">Never Overwrites SOLL Docs</text>
+</svg>

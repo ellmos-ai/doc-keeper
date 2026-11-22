@@ -11,6 +11,19 @@ requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE", "THIRD_PARTY_LICENSES.md"]
 authors = [{ name = "ellmos-ai" }]
+keywords = [
+    "ast",
+    "bach",
+    "cli",
+    "documentation",
+    "documentation-audit",
+    "drift-detection",
+    "local-first",
+    "open-ocean",
+    "quality-assurance",
+    "static-analysis",
+    "zero-dependencies",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -22,6 +35,19 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/ellmos-ai/doc-keeper"
+Repository = "https://github.com/ellmos-ai/doc-keeper"
+Documentation = "https://github.com/ellmos-ai/doc-keeper#readme"
+Issues = "https://github.com/ellmos-ai/doc-keeper/issues"
+Changelog = "https://github.com/ellmos-ai/doc-keeper/blob/main/CHANGELOG.md"
 
 [project.scripts]
 doc-keeper = "doc_keeper.cli:main"
