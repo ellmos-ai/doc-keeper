@@ -1,0 +1,58 @@
+# doc-keeper (ellmos-doc-keeper) — LLM Entry Point
+
+> Deterministic 3-Cause Documentation Audit & Decision Rule Router for Ocean, BACH, and arbitrary Git repositories.
+
+- Package: `ellmos-doc-keeper`
+- Version: `0.1.0`
+- License: `MIT`
+- Language / Runtime: Python `>=3.10` (zero third-party runtime dependencies; stdlib only)
+- Repository: `https://github.com/ellmos-ai/doc-keeper`
+- Product Skill: `SKILL.md`
+- Bilingual Docs: `README.md` (EN), `README_de.md` (DE)
+- Agent Role Prompts: `prompts/DOC-KEEPER.en.md`, `prompts/DOC-KEEPER.de.md`
+- Module Manifest: `ellmos-module.v2.json`
+- Rule Config: `config/doc_machine.config.json`
+- Last-checked: `2026-11-22`
+
+## 1. Prerequisites
+- Python `>=3.10`
+- Optional: `git` on `PATH` (used read-only for `git log -S` erosion checks)
+- Network egress: `none` (100% local static AST & filesystem inspection)
+
+## 2. Installation Command
+```bash
+python -m venv .venv
+.venv/Scripts/python -m pip install -e .
+```
+(On Linux/macOS use `.venv/bin/python -m pip install -e .`)
+
+## 3. Verification Command
+```bash
+python -m doc_keeper --help
+python -m doc_keeper audit . --json
+python -m pytest -ra -v
+```
+
+## 4. Minimal Example
+```bash
+python -m doc_keeper audit /path/to/repo --json
+python -m doc_keeper rules /path/to/repo
+```
+
+```python
+from doc_keeper import audit_repository
+
+report = audit_repository(".")
+print(report["summary"])
+```
+
+## Core Interfaces
+- CLI (`src/doc_keeper/cli.py`):
+  - `doc-keeper audit [repo] [--json] [--output PATH]`
+  - `doc-keeper rules [repo]`
+- Python API (`src/doc_keeper/__init__.py`):
+  - `extract_repo_claims(repo_root, doc_globs=...)`
+  - `audit_repository(repo_root, doc_globs=..., config_override=...)`
+  - `classify_doc_reality_diff(...)`
+  - `resolve_doc_machine_dispatch(...)`
+  - `load_doc_machine_config(workspace_root=..., config_override=...)`

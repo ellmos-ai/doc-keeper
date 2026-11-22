@@ -2,7 +2,8 @@
 """Contract and metadata tests for doc-keeper repository.
 
 Verifies PEP 621 / PEP 561 compliance, .gitignore hygiene, manifest integrity,
-bilingual documentation parity, TODO.md release status table, and zero personal paths.
+bilingual documentation parity, Policy P-022 LLM entry points, community health,
+TODO.md release status table, self-audit consistency, and zero personal paths.
 """
 from __future__ import annotations
 
@@ -10,6 +11,7 @@ import json
 from pathlib import Path
 import re
 import sys
+import xml.etree.ElementTree as ET
 
 if sys.version_info >= (3, 11):
     import tomllib
@@ -17,6 +19,7 @@ else:
     import tomli as tomllib
 
 import doc_keeper
+from doc_keeper import audit_repository
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -61,7 +64,7 @@ def test_gitignore_hygiene():
 
 
 def test_pep621_and_pep561_metadata():
-    """Verify pyproject.toml PEP 621 and PEP 561 metadata and pytest configuration."""
+    """Verify pyproject.toml PEP 621, PEP 561, PEP 639, URLs, and keywords."""
     with open(REPO_ROOT / "pyproject.toml", "rb") as f:
         data = tomllib.load(f)
 
@@ -72,7 +75,15 @@ def test_pep621_and_pep561_metadata():
     assert project.get("license") == "MIT"
     assert "LICENSE" in project.get("license-files", [])
     assert "THIRD_PARTY_LICENSES.md" in project.get("license-files", [])
-    assert "Typing :: Typed" in project.get("classifiers", [])
+    classifiers = project.get("classifiers", [])
+    assert "Typing :: Typed" in classifiers
+    assert not any(c.startswith("License ::") for c in classifiers), (
+        "PEP 639 license string must not be combined with License :: classifier"
+    )
+    assert len(project.get("keywords", [])) >= 5
+    urls = project.get("urls", {})
+    assert "Repository" in urls and "ellmos-ai/doc-keeper" in urls["Repository"]
+    assert "Issues" in urls
 
     # Package data
     tool_setuptools = data.get("tool", {}).get("setuptools", {})
@@ -136,14 +147,73 @@ def test_config_umlauts_and_structure():
 
 
 def test_bilingual_readme_and_mermaid():
-    """Verify English README.md and German README_de.md both contain Mermaid diagrams."""
+    """Verify English README.md and German README_de.md both contain flowchart and sequenceDiagram."""
     readme_en = _read_text("README.md")
     readme_de = _read_text("README_de.md")
 
     assert "```mermaid" in readme_en
     assert "```mermaid" in readme_de
+    assert "sequenceDiagram" in readme_en
+    assert "sequenceDiagram" in readme_de
     assert "classify_doc_reality_diff" in readme_en
     assert "classify_doc_reality_diff" in readme_de
+    assert "assets/terminal-workflow.svg" in readme_en
+    assert "assets/terminal-workflow.svg" in readme_de
+    assert "## 5. Install with your LLM" in readme_en
+    assert "## 5. Mit deinem LLM installieren" in readme_de
+    assert "llms.txt" in readme_en and "SKILL.md" in readme_en
+    assert "llms.txt" in readme_de and "SKILL.md" in readme_de
+
+
+def test_terminal_workflow_svg_valid():
+    """Verify assets/terminal-workflow.svg exists and parses as valid SVG XML."""
+    svg_text = _read_text("assets/terminal-workflow.svg")
+    root = ET.fromstring(svg_text)
+    assert root.tag.endswith("svg")
+    assert "doc-keeper" in svg_text
+
+
+def test_p022_llm_entry_files_present():
+    """Verify SKILL.md, llms.txt, and llm.txt meet Policy P-022 requirements."""
+    skill_text = _read_text("SKILL.md")
+    llms_text = _read_text("llms.txt")
+    llm_text = _read_text("llm.txt")
+
+    assert "name: doc-keeper" in skill_text
+    assert "0.1.0" in skill_text
+    assert "audit_repository()" in skill_text
+    assert "Prerequisites" in llms_text
+    assert "Installation Command" in llms_text
+    assert "Verification Command" in llms_text
+    assert "Minimal Example" in llms_text
+    assert "Last-checked:" in llms_text
+    assert "llms.txt" in llm_text
+
+
+def test_community_health_files_bilingual_and_templates():
+    """Verify bilingual CODE_OF_CONDUCT.md, CONTRIBUTING.md, and GitHub issue templates."""
+    coc = _read_text("CODE_OF_CONDUCT.md")
+    contrib = _read_text("CONTRIBUTING.md")
+    bug_tpl = _read_text(".github/ISSUE_TEMPLATE/bug_report.md")
+    feat_tpl = _read_text(".github/ISSUE_TEMPLATE/feature_request.md")
+    cfg_tpl = _read_text(".github/ISSUE_TEMPLATE/config.yml")
+
+    assert "## Deutsch" in coc and "## English" in coc
+    assert "## Deutsch" in contrib and "## English" in contrib
+    assert "labels: bug" in bug_tpl
+    assert "labels: enhancement" in feat_tpl
+    assert "security/advisories" in cfg_tpl
+
+
+def test_dogfood_self_audit_clean():
+    """Verify doc-keeper's own documentation claims align 100% with codebase reality."""
+    report = audit_repository(REPO_ROOT)
+    summary = report["summary"]
+    assert summary["total_claims_probed"] > 0
+    assert summary["unintended_erosion"] == 0, f"Findings: {report['findings']}"
+    assert summary["planned_terraforming_pending"] == 0, f"Findings: {report['findings']}"
+    assert summary["completed_terraforming_doc_lag"] == 0, f"Findings: {report['findings']}"
+    assert summary["aligned_claims"] == summary["total_claims_probed"]
 
 
 def test_zero_personal_paths_and_secrets():

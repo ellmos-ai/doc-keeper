@@ -1,0 +1,5 @@
+# Compatibility Pointer -> llms.txt
+
+Please read `llms.txt` in the repository root for the canonical machine-readable entry point, prerequisites, installation steps, verification commands, and minimal examples for `doc-keeper` (`ellmos-doc-keeper`).
+
+See also `SKILL.md` for full agent usage guidance, `README.md` (English), and `README_de.md` (Deutsch).
