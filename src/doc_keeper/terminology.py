@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import datetime, timezone
@@ -164,23 +165,22 @@ def _iter_candidate_files(
     ex_files = set(excluded_files)
 
     files: list[Path] = []
-    for path in root.rglob("*"):
-        if not path.is_file():
-            continue
-        if path.suffix.lower() not in extensions:
-            continue
-        rel = path.relative_to(root)
-        if any(part in ex_dirs for part in rel.parts[:-1]):
-            continue
-        if path.name in ex_files:
-            continue
-        if not include_tests and (
-            path.name.startswith("test_")
-            or path.name.endswith((".test.mjs", ".test.js", ".test.ts", ".spec.ts", ".spec.js"))
-        ):
-            continue
-        files.append(path)
-    return sorted(files)
+    for dirpath, dirnames, filenames in os.walk(root, topdown=True):
+        dirnames[:] = sorted(d for d in dirnames if d not in ex_dirs)
+        base = Path(dirpath)
+        for fname in sorted(filenames):
+            if fname in ex_files:
+                continue
+            path = base / fname
+            if path.suffix.lower() not in extensions:
+                continue
+            if not include_tests and (
+                fname.startswith("test_")
+                or fname.endswith((".test.mjs", ".test.js", ".test.ts", ".spec.ts", ".spec.js"))
+            ):
+                continue
+            files.append(path)
+    return files
 
 
 def _strip_legacy_wire_segments(line: str, legacy_tokens: Sequence[str]) -> tuple[str, list[str]]:
